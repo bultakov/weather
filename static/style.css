@@ -1,0 +1,173 @@
+html {
+    font-family: 'Roboto Slab', sans-serif;
+}
+
+
+img {
+    max-width: 100%;
+}
+
+.box {
+    margin: 1em auto;
+    background: #f0f0f0;
+    padding: 2em 0;
+    width: 300px;
+    border-radius: 3px;
+    box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.25);
+}
+
+.box:hover {
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.box h1 {
+    font-size: 2em;
+    text-align: center;
+}
+
+.box .temp {
+    font-size: 7em;
+    line-height: 1;
+    text-align: center;
+    display: block;
+    padding-left: 30px;
+    margin-bottom: 24px;
+}
+
+
+.box .high-low {
+    font-size: 2em;
+    color: #5a7285;
+    text-align: center;
+    display: block;
+    font-weight: 100;
+}
+
+.weather .icon {
+    position: relative;
+    margin: 0 auto;
+}
+
+.spin {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    text-align: center;
+    width: 65px;
+}
+
+.bubble.black {
+    background-color: #313E48;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    padding: 0px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+}
+
+.bubble.black:after {
+    content: "";
+    position: absolute;
+    bottom: -14px;
+    left: 14px;
+    border-style: solid;
+    border-width: 29px 15px 0;
+    border-color: #313E48 transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    transform: rotate(30deg);
+}
+
+.spin img {
+    animation: spin 5s linear infinite;
+    animation-play-state: paused;
+}
+
+.box:hover .spin img {
+    animation-play-state: running;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(1turn);
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #130f40;
+    font-family: 'Lato' !important;
+}
+
+.search-box {
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+}
+
+.input-search {
+    height: 50px;
+    width: 50px;
+    border-style: none;
+    padding: 10px;
+    font-size: 18px;
+    letter-spacing: 2px;
+    outline: none;
+    border-radius: 25px;
+    transition: all .5s ease-in-out;
+    background-color: #22a6b3;
+    padding-right: 40px;
+    color: #fff;
+}
+
+.input-search::placeholder {
+    color: rgba(255, 255, 255, .5);
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: 100;
+}
+
+.btn-search {
+    width: 50px;
+    height: 50px;
+    border-style: none;
+    font-size: 20px;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+    border-radius: 50%;
+    position: absolute;
+    right: 0px;
+    color: #ffffff;
+    background-color: transparent;
+    pointer-events: painted;
+}
+
+.btn-search:focus ~ .input-search {
+    width: 300px;
+    border-radius: 0px;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+
+.input-search:focus {
+    width: 300px;
+    border-radius: 0px;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}

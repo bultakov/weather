@@ -2,6 +2,8 @@ from django.shortcuts import render
 
 from aiohttp import ClientSession
 
+from datetime import datetime
+
 
 async def get(url: str) -> dict:
     async with ClientSession() as session:
@@ -16,11 +18,15 @@ async def home(request):
     response = await get(url=url.format(city, api_key))
     if response.get('message') == 'city not found':
         return render(request=request, template_name='index.html', context={'message': 'notfound'})
+    date = datetime.now()
     weather: dict = {
         'city': city,
-        'temperature': response['main']['temp'],
+        'temp': int(response['main']['temp']),
+        'temp_min': int(response['main']['temp_min']),
+        'temp_max': int(response['main']['temp_max']),
         'description': response['weather'][0]['description'],
         'icon': response['weather'][0]['icon'],
+        'date': date.strftime('%A'),
     }
     context: dict = {
         'weather': weather

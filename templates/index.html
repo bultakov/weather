@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,62 +6,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.css"/>
+    <title>Weather APP</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
 </head>
 
 <body>
-<section class="section">
-    <div class="container">
-        <div class="columns">
-            <div class="column is-offset-4 is-4">
-                <form method="POST" action="{% url 'home' %}">
-                    {% csrf_token %}
-                    <div class="field has-addons">
-                        <div class="control is-expanded">
-                            <input class="input" type="text" placeholder="Shahar nomi" name="search" required>
-                        </div>
-                        <div class="control">
-                            <button class="button is-info">
-                                Izlash...
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+<section>
+    <form action="{% url 'home' %}" method="POST">
+        {% csrf_token %}
+        <div class="search-box">
+            <button class="btn-search"><i class="fas fa-search"></i></button>
+            <input name="search" type="text" class="input-search" placeholder="Type to Search..." required>
         </div>
-    </div>
-</section>
-<section class="section">
-    <div class="container">
-        <div class="columns">
-            <div class="column is-offset-4 is-4">
-                {% if not message %}
-                    <div class="box">
-                        <article class="media">
-                            <div class="media-left">
-                                <figure class="image is-50x50">
-                                    <img src="https://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <div class="content">
-                                    <p>
-                                        <span class="title">{{ weather.city }}</span>
-                                        <br>
-                                        <span class="subtitle">{{ weather.temperature }}° C</span>
-                                        <br> {{ weather.description }}
-                                    </p>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                {% else %}
-                    <h1>Not Found</h1>
-                {% endif %}
+    </form>
+    {% if not message %}
+        <article class="box weather">
+            <div class="icon bubble black">
+                <div class="spin">
+                    <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="Image">
+                </div>
             </div>
-        </div>
-    </div>
+            <h1>{{ weather.city }}</h1>
+            <h2 style="text-align: center">{{ weather.date }}</h2>
+            <span class="temp">{{ weather.temp }}&deg;</span>
+            <span class="high-low">{{ weather.temp_min }}&deg;/ {{ weather.temp_max }}&deg;</span>
+        </article>
+    {% else %}
+        <h1>Not Found</h1>
+    {% endif %}
 </section>
 <footer class="footer">
 </footer>
