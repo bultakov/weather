@@ -10,12 +10,12 @@ async def get(url: str) -> dict:
 
 
 async def home(request):
-    city: str = "Samarqand"
-    if request.POST:
-        city: str = request.POST.get('search')
+    city: str = request.POST.get('search') if request.POST else "Samarqand"
     api_key: str = "af82ad5966541eca3cfa0d349ff10587"  # https://openweathermap.org/
     url: str = "https://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units=metric"
     response = await get(url=url.format(city, api_key))
+    if response.get('message') == 'city not found':
+        return render(request=request, template_name='index.html', context={'message': 'notfound'})
     weather: dict = {
         'city': city,
         'temperature': response['main']['temp'],
