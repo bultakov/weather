@@ -28,6 +28,7 @@ async def home(request):
         'icon': response['weather'][0]['icon'],
         'date': date.strftime('%A'),
     }
+    print(response)
     context: dict = {
         'weather': weather
     }
